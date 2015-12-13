@@ -16,12 +16,16 @@ public class TreePanel extends JPanel{
   private static final int WIDTH=36;
   private static final int LEVELDISTANCE=3;
   private int[][] grid;
-  RandomTree tree;
   private JLayeredPane lpane = new JLayeredPane();
   private JPanel panelStart = new JPanel();
   private JPanel panelBackground = new JPanel();
+  private RandomTree tree;
+  private int x;
+  private int y;
   
-  public TreePanel(){
+  public TreePanel(int number){
+    x=16;
+    y=32;
     setBackground(new Color(218,218,218));
     setLayout(new BorderLayout());
     lpane.setBounds(0, 0, 600, 400);
@@ -33,11 +37,21 @@ public class TreePanel extends JPanel{
     panelBackground.add(bthumb);
     
     panelBackground.setBounds(-40, 0, 1345, 1095);
+    addKeyListener(new KeyInput()); 
     
+    //panelStart.setBackground(Color.black);
+    //lpane.setBackground(Color.black);
+    //lpane.add(panelStart, new Integer(3));
+    panelBackground.setOpaque(false);
+    lpane.add(panelBackground, new Integer(1), 0);
+    add(lpane, BorderLayout.CENTER);
+  }
+  
+  public RandomTree getTree(){
+    return tree;
+  }
+  private void drawTree(){
     String[] images={"rupee1.jpg","rupee2.jpg","rupee3.jpg","rupee4.jpg","rupee5.jpg","rupee6.jpg"};
-    tree=new RandomTree();
-    System.out.println(tree);
-    convertTree(tree.getTree());
     for(int y=0;y<WIDTH;y++){
       for(int x=0;x<WIDTH;x++){
         if(grid[y][x]==0){
@@ -50,23 +64,18 @@ public class TreePanel extends JPanel{
           img2.setBounds(x*30,(y+10)%WIDTH*30,30,30);
           add(img2);
         }
+        else if(grid[y][x]==-2){
+          JLabel makar =new JLabel(new ImageIcon("images/makar.png"));
+          makar.setBounds(x*30,(y+10)%WIDTH*30,30,30);
+          add(makar);
+        }
         else{
           JLabel img3 =new JLabel(new ImageIcon("images/"+images[grid[y][x]%images.length]));
           img3.setBounds(x*30,(y+10)%WIDTH*30,30,30);
           add(img3);
         }
       }
-     
-      
     }
-
-    //panelStart.setBackground(Color.black);
-    //lpane.setBackground(Color.black);
-    //lpane.add(panelStart, new Integer(3));
-    panelBackground.setOpaque(false);
-    lpane.add(panelBackground, new Integer(1), 0);
-    add(lpane, BorderLayout.CENTER);
-  }
   
   public int[][] convertTree(int[] intArray){
     //0 for grass; 1 for nodes
@@ -134,7 +143,70 @@ public class TreePanel extends JPanel{
     //find out which parent current node belongs to
     return (((x/childSeg)+1)/2)*parentSeg; //returns parent's x coordinate
   }
-  
+  private void moveMakar(int x, int y){
+    int temp = grid[y][x];
+    grid[y][x]=-2;
+  }
+  public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            
+            g.drawImage(pmImage, xCoordinate, yCoordinate, this); // ??
+
+            // ??
+            if (key_down) {  
+              if ( yCoordinate<= 950) yCoordinate ++; 
+            }
+
+            // ??
+            else if (key_up) {  
+              if(yCoordinate>= 0) yCoordinate --; 
+            }
+
+            else if (key_right) {  
+              if ( xCoordinate<= 950) xCoordinate ++;
+            }
+
+            else if (key_left) {  
+               if ( xCoordinate>= 0) xCoordinate --; }
+            
+            else if (key_space) {
+            //check to see if we collided with a gem
+            //if yes then pick up the gem
+            // if no then do nothing
+            // if wrong gem display message oops
+            // otherwise make the gem disappear
+            //add it to the game board menu as a recently picked up gem
+              System.out.println(getXCoordinate());
+              System.out.println(getYCoordinate());
+              int x = getXCoordinate()/30;
+              int y = getYCoordinate()/30;
+
+            }
+
+            // ?? - ??????? 
+            //for (int index = 0; index < 10000000; index++) {}
+
+            repaint()
+  }
+  private class KeyInput implements KeyListener {
+            public void keyTyped(KeyEvent e) {}
+
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == e.VK_DOWN) key_down = false;
+                if (e.getKeyCode() == e.VK_UP) key_up = false;
+                if (e.getKeyCode() == e.VK_RIGHT) key_right = false;
+                if (e.getKeyCode() == e.VK_LEFT) key_left = false;
+                if (e.getKeyCode() == e.VK_SPACE) key_space = false;
+            }
+
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == e.VK_DOWN) key_down = true;
+                if (e.getKeyCode() == e.VK_UP) key_up = true;
+                if (e.getKeyCode() == e.VK_RIGHT) key_right = true;
+                if (e.getKeyCode() == e.VK_LEFT) key_left = true;
+                if (e.getKeyCode() == e.VK_SPACE) key_space = true;
+            }
+        }
   public static void main(String[] args){
     //int test[]={1,1,1,1,1,1,1,0,0,1,1,1,1,0,1,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,0};
     int test[]={1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
