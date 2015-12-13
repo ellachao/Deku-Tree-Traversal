@@ -26,7 +26,8 @@ public class GamePanel extends JPanel{
     //creates the tabs for the respective panels
     //tp.addTab ("Home", new StartPanel());
     //frame.add(new ChoicePanel());
-    frame.add(new StartPanel());
+    // frame.add(new StartPanel());
+     frame.add(new TreePanel(1));
     //tp.add( new InfoPanel());
     //tp.add( new StartPanel());
     //frame.getContentPane().add(tp);
