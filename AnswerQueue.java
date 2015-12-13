@@ -21,7 +21,10 @@ public class AnswerQueue {
   // 3: level order
   // 4: random
   //================================================================
-  public AnswerQueue(int i,RandomTree t){
+
+
+  public AnswerQueue(int i, RandomTree t){
+
     RandomTree gameTree = t;
     
     if (i==4) i = (int)Math.random()*3;
@@ -71,6 +74,7 @@ public class AnswerQueue {
     
     public int checkAnswer(int i) {
       Integer input = new Integer(i);
+      
       if (input.equals(peek())){
         answer.dequeue();
         

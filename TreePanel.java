@@ -11,6 +11,8 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class TreePanel extends JPanel{
   private static final int WIDTH=36;
@@ -29,12 +31,15 @@ public class TreePanel extends JPanel{
   private AnswerQueue ans;
   
   public TreePanel(int number){
+    this.setFocusable(true);
+    addKeyListener(new KeyInput()); 
     tree=new RandomTree();
     convertTree(tree.getTree());
     x=16;
     y=32;
-    drawTree();
     temp=grid[y][x];
+    grid[y][x]=-2;
+    drawTree();
     setBackground(new Color(218,218,218));
     setLayout(new BorderLayout());
     lpane.setBounds(0, 0, 600, 400);
@@ -46,7 +51,6 @@ public class TreePanel extends JPanel{
     panelBackground.add(bthumb);
     
     panelBackground.setBounds(-40, 0, 1345, 1095);
-    addKeyListener(new KeyInput()); 
     
     //panelStart.setBackground(Color.black);
     //lpane.setBackground(Color.black);
@@ -172,10 +176,51 @@ public class TreePanel extends JPanel{
     //find out which parent current node belongs to
     return (((x/childSeg)+1)/2)*parentSeg; //returns parent's x coordinate
   }
-  private void moveMakar(int x, int y){
-    int temp = grid[y][x];
-    grid[y][x]=-2;
+  private void moveMakar(int shiftX, int shiftY){
+    grid[y][x]=temp;
+    int newY=((y+shiftY)%WIDTH<0)?(WIDTH-1):(y+shiftY)%WIDTH;
+    int newX=((x+shiftX)%WIDTH<0)?(WIDTH-1):(x+shiftX)%WIDTH;
+    temp=grid[newY][newX];
+    grid[newY][newX]=-2;
+    
+    x=newX;
+    y=newY;
+    System.out.println(1);
   }
+  
+  public void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    if (key_down) {  
+      moveMakar(0,1);
+      
+    }
+    else if (key_up) {  
+      moveMakar(0,-1);
+    }
+    
+    else if (key_right) {  
+      moveMakar(1,0);
+    }
+    
+    else if (key_left) {  
+      moveMakar(-1,0);
+    }
+    else if (key_space) {
+      //check to see if we collided with a gem
+      //if yes then pick up the gem
+      // if no then do nothing
+      // if wrong gem display message oops
+      // otherwise make the gem disappear
+      //add it to the game board menu as a recently picked up gem
+ 
+      
+    }
+    removeAll();
+    revalidate();
+    drawTree();
+    repaint();
+  }
+
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
     
@@ -217,9 +262,9 @@ public class TreePanel extends JPanel{
     
     repaint();
   }
+
   private class KeyInput implements KeyListener {
     public void keyTyped(KeyEvent e) {}
-    
     public void keyReleased(KeyEvent e) {
       if (e.getKeyCode() == e.VK_DOWN) key_down = false;
       if (e.getKeyCode() == e.VK_UP) key_up = false;
