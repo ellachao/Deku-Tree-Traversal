@@ -146,7 +146,7 @@ public class ChoicePanel extends JPanel{
     public void actionPerformed(ActionEvent event){
       if (event.getSource() == inorderButton) {
         System.out.println("inorder button press");
-        TreePanel treePanel = new TreePanel();
+        TreePanel treePanel = new TreePanel(0);
         add(treePanel);
         validate();
         repaint();
@@ -155,7 +155,7 @@ public class ChoicePanel extends JPanel{
       }
       if (event.getSource() == postButton)  {
         System.out.println("post button press");
-        TreePanel treePanel = new TreePanel();
+        TreePanel treePanel = new TreePanel(2);
         add(treePanel);
         validate();
         repaint();
@@ -163,7 +163,7 @@ public class ChoicePanel extends JPanel{
       }
       if (event.getSource() == levelButton)  {
         System.out.println("level button press");
-        TreePanel treePanel = new TreePanel();
+        TreePanel treePanel = new TreePanel(3);
         add(treePanel);
         validate();
         repaint();
@@ -171,7 +171,7 @@ public class ChoicePanel extends JPanel{
       }
       if (event.getSource() == preButton)  {
         System.out.println("pre button press");
-        TreePanel treePanel = new TreePanel();
+        TreePanel treePanel = new TreePanel(1);
         add(treePanel);
         validate();
         repaint();
@@ -179,7 +179,7 @@ public class ChoicePanel extends JPanel{
       }
       if (event.getSource() == surpriseButton)  {
         System.out.println("surprise button press");
-        TreePanel treePanel = new TreePanel();
+        TreePanel treePanel = new TreePanel(4);
         add(treePanel);
         validate();
         repaint();
