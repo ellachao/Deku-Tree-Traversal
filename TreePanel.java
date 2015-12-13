@@ -19,11 +19,14 @@ public class TreePanel extends JPanel{
   private JLayeredPane lpane = new JLayeredPane();
   private JPanel panelStart = new JPanel();
   private JPanel panelBackground = new JPanel();
+  private JPanel panelLabel1 = new JPanel();
+  private JPanel panelLabel2 = new JPanel();
   private RandomTree tree;
   private boolean key_right, key_left, key_down, key_up, key_space; // Input booleans
   private int x;
   private int y;
   private int temp;
+  private AnswerQueue ans;
   
   public TreePanel(int number){
     tree=new RandomTree();
@@ -49,7 +52,26 @@ public class TreePanel extends JPanel{
     //lpane.setBackground(Color.black);
     //lpane.add(panelStart, new Integer(3));
     panelBackground.setOpaque(false);
+    
+    ans = new AnswerQueue(number, tree);
+    
+   
+    
+    JLabel orderLabel = new JLabel("<html><p>Pick up the rupees in</p> <p style=\"text-align:center\">" + ans.getTraversal() +"!</p></html>");
+    orderLabel.setFont(new Font("Verdana",1,20));
+    panelLabel1.setOpaque(false);
+    panelLabel1.add(orderLabel);
+    panelLabel1.setBounds(955,300,500,500);
+    
+    JLabel messageLabel = new JLabel("Good luck!");
+    messageLabel.setFont(new Font("Verdana",1,20));
+    panelLabel2.setOpaque(false);
+    panelLabel2.add(messageLabel);
+    panelLabel2.setBounds(955,400,500,500);
+    
     lpane.add(panelBackground, new Integer(1), 0);
+    lpane.add(panelLabel1, new Integer(2), 0);
+    lpane.add(panelLabel2, new Integer(2), 0);
     add(lpane, BorderLayout.CENTER);
   }
   
@@ -154,43 +176,47 @@ public class TreePanel extends JPanel{
     int temp = grid[y][x];
     grid[y][x]=-2;
   }
-//  public void paintComponent(Graphics g) {
-//    super.paintComponent(g);
-//    
-//    // ??
-//    if (key_down) {  
-//      
-//    }
-//    
-//    // ??
-//    else if (key_up) {  
-//     
-//    }
-//    
-//    else if (key_right) {  
-//
-//    }
-//    
-//    else if (key_left) {  
-//     
-//    }
-//    
-//    else if (key_space) {
-//      //check to see if we collided with a gem
-//      //if yes then pick up the gem
-//      // if no then do nothing
-//      // if wrong gem display message oops
-//      // otherwise make the gem disappear
-//      //add it to the game board menu as a recently picked up gem
-// 
-//      
-//    }
-//    
-//    // ?? - ??????? 
-//    //for (int index = 0; index < 10000000; index++) {}
-//    
-//    repaint();
-//  }
+  public void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    
+    // ??
+    if (key_down) {  
+      
+    }
+    
+    // ??
+    else if (key_up) {  
+     
+    }
+    
+    else if (key_right) {  
+
+    }
+    
+    else if (key_left) {  
+     
+    }
+    
+    else if (key_space) {
+      //check to see if we collided with a gem
+      //if yes then pick up the gem
+      // if no then do nothing
+      // if wrong gem display message oops
+      // otherwise make the gem disappear
+      //add it to the game board menu as a recently picked up gem
+      int result = ans.checkAnswer(grid[x][y]);
+      //if (result == -1) gameWon();
+      //if (result == 0) tryAgain();
+      //if (result == 1) pickGem();
+      
+      
+    }
+     
+    // ?? - ??????? 
+    //for (int index = 0; index < 10000000; index++) {}
+    
+    repaint();
+  }
   private class KeyInput implements KeyListener {
     public void keyTyped(KeyEvent e) {}
     
