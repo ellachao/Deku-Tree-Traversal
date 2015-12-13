@@ -20,12 +20,17 @@ public class TreePanel extends JPanel{
   private JPanel panelStart = new JPanel();
   private JPanel panelBackground = new JPanel();
   private RandomTree tree;
+  private boolean key_right, key_left, key_down, key_up, key_space; // Input booleans
   private int x;
   private int y;
+  private int temp;
   
   public TreePanel(int number){
+    tree=new RandomTree();
+    convertTree(tree.getTree());
     x=16;
     y=32;
+    temp=grid[y][x];
     setBackground(new Color(218,218,218));
     setLayout(new BorderLayout());
     lpane.setBounds(0, 0, 600, 400);
@@ -76,6 +81,7 @@ public class TreePanel extends JPanel{
         }
       }
     }
+  }
   
   public int[][] convertTree(int[] intArray){
     //0 for grass; 1 for nodes
@@ -148,65 +154,61 @@ public class TreePanel extends JPanel{
     grid[y][x]=-2;
   }
   public void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            
-            g.drawImage(pmImage, xCoordinate, yCoordinate, this); // ??
+    super.paintComponent(g);
+    
+    // ??
+    if (key_down) {  
+      
+    }
+    
+    // ??
+    else if (key_up) {  
+     
+    }
+    
+    else if (key_right) {  
 
-            // ??
-            if (key_down) {  
-              if ( yCoordinate<= 950) yCoordinate ++; 
-            }
-
-            // ??
-            else if (key_up) {  
-              if(yCoordinate>= 0) yCoordinate --; 
-            }
-
-            else if (key_right) {  
-              if ( xCoordinate<= 950) xCoordinate ++;
-            }
-
-            else if (key_left) {  
-               if ( xCoordinate>= 0) xCoordinate --; }
-            
-            else if (key_space) {
-            //check to see if we collided with a gem
-            //if yes then pick up the gem
-            // if no then do nothing
-            // if wrong gem display message oops
-            // otherwise make the gem disappear
-            //add it to the game board menu as a recently picked up gem
-              System.out.println(getXCoordinate());
-              System.out.println(getYCoordinate());
-              int x = getXCoordinate()/30;
-              int y = getYCoordinate()/30;
-
-            }
-
-            // ?? - ??????? 
-            //for (int index = 0; index < 10000000; index++) {}
-
-            repaint()
+    }
+    
+    else if (key_left) {  
+     
+    }
+    
+    else if (key_space) {
+      //check to see if we collided with a gem
+      //if yes then pick up the gem
+      // if no then do nothing
+      // if wrong gem display message oops
+      // otherwise make the gem disappear
+      //add it to the game board menu as a recently picked up gem
+ 
+      
+    }
+    
+    // ?? - ??????? 
+    //for (int index = 0; index < 10000000; index++) {}
+    
+    repaint();
   }
   private class KeyInput implements KeyListener {
-            public void keyTyped(KeyEvent e) {}
-
-            public void keyReleased(KeyEvent e) {
-                if (e.getKeyCode() == e.VK_DOWN) key_down = false;
-                if (e.getKeyCode() == e.VK_UP) key_up = false;
-                if (e.getKeyCode() == e.VK_RIGHT) key_right = false;
-                if (e.getKeyCode() == e.VK_LEFT) key_left = false;
-                if (e.getKeyCode() == e.VK_SPACE) key_space = false;
-            }
-
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == e.VK_DOWN) key_down = true;
-                if (e.getKeyCode() == e.VK_UP) key_up = true;
-                if (e.getKeyCode() == e.VK_RIGHT) key_right = true;
-                if (e.getKeyCode() == e.VK_LEFT) key_left = true;
-                if (e.getKeyCode() == e.VK_SPACE) key_space = true;
-            }
-        }
+    public void keyTyped(KeyEvent e) {}
+    
+    public void keyReleased(KeyEvent e) {
+      if (e.getKeyCode() == e.VK_DOWN) key_down = false;
+      if (e.getKeyCode() == e.VK_UP) key_up = false;
+      if (e.getKeyCode() == e.VK_RIGHT) key_right = false;
+      if (e.getKeyCode() == e.VK_LEFT) key_left = false;
+      if (e.getKeyCode() == e.VK_SPACE) key_space = false;
+    }
+    
+    public void keyPressed(KeyEvent e) {
+      if (e.getKeyCode() == e.VK_DOWN) key_down = true;
+      if (e.getKeyCode() == e.VK_UP) key_up = true;
+      if (e.getKeyCode() == e.VK_RIGHT) key_right = true;
+      if (e.getKeyCode() == e.VK_LEFT) key_left = true;
+      if (e.getKeyCode() == e.VK_SPACE) key_space = true;
+    }
+  }
   public static void main(String[] args){
     //int test[]={1,1,1,1,1,1,1,0,0,1,1,1,1,0,1,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,0};
     int test[]={1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
