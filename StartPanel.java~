@@ -31,7 +31,7 @@ public class StartPanel extends JPanel{
         add(lpane, BorderLayout.CENTER);
         lpane.setBounds(0, 0, 600, 400);
         //panelBackground.setBackground(Color.BLUE);
-        ImageIcon background = new ImageIcon("image/start.jpg"); 
+        ImageIcon background = new ImageIcon("image\start.jpg"); 
         //creates a label and sets the image to it
         JLabel bthumb = new JLabel();
         bthumb.setIcon(background);
@@ -57,8 +57,8 @@ public class StartPanel extends JPanel{
         BufferedImage infoButtonIcon=null;
         BufferedImage startButtonIcon=null;
         try{
-        infoButtonIcon = ImageIO.read(new File("images/info.png"));
-        startButtonIcon = ImageIO.read(new File("images/startGame.png"));
+        infoButtonIcon = ImageIO.read(new File("images\info.png"));
+        startButtonIcon = ImageIO.read(new File("images\startGame.png"));
         }catch(IOException e){
          System.out.println("yolo");
         }
