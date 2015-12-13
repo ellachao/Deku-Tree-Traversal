@@ -31,7 +31,7 @@ public class StartPanel extends JPanel{
         add(lpane, BorderLayout.CENTER);
         lpane.setBounds(0, 0, 600, 400);
         //panelBackground.setBackground(Color.BLUE);
-        ImageIcon background = new ImageIcon("image/start.jpg"); 
+        ImageIcon background = new ImageIcon("images/start.jpg"); 
         //creates a label and sets the image to it
         JLabel bthumb = new JLabel();
         bthumb.setIcon(background);
@@ -94,11 +94,18 @@ private class ButtonListener implements ActionListener{
     public void actionPerformed(ActionEvent event){
       if (event.getSource() == infoButton) {
         System.out.println("info button press"); 
-          InfoPanel iPanel = new InfoPanel();
-          add(iPanel);
+        InfoPanel infoPanel = new InfoPanel();
+        add(infoPanel);
+        validate();
+        repaint();
+        remove(lpane);
       }
        if (event.getSource() == startButton)  {
-         System.out.println("start button press");
+         ChoicePanel choicePanel = new ChoicePanel();
+         add(choicePanel);
+         validate();
+         repaint();
+         remove(lpane);
      }
       
     }

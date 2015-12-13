@@ -77,7 +77,12 @@ public class InfoPanel extends JPanel{
     
     public void actionPerformed(ActionEvent event){
       if (event.getSource() == startButton)  {
-        System.out.println("start button press");
+        System.out.println("start button from info press");
+         ChoicePanel choicePanel = new ChoicePanel();
+         add(choicePanel);
+         validate();
+         repaint();
+         remove(lpane);
       }
       
     }
