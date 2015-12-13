@@ -30,6 +30,7 @@ public class TreePanel extends JPanel{
     convertTree(tree.getTree());
     x=16;
     y=32;
+    drawTree();
     temp=grid[y][x];
     setBackground(new Color(218,218,218));
     setLayout(new BorderLayout());
@@ -153,43 +154,43 @@ public class TreePanel extends JPanel{
     int temp = grid[y][x];
     grid[y][x]=-2;
   }
-  public void paintComponent(Graphics g) {
-    super.paintComponent(g);
-    
-    // ??
-    if (key_down) {  
-      
-    }
-    
-    // ??
-    else if (key_up) {  
-     
-    }
-    
-    else if (key_right) {  
-
-    }
-    
-    else if (key_left) {  
-     
-    }
-    
-    else if (key_space) {
-      //check to see if we collided with a gem
-      //if yes then pick up the gem
-      // if no then do nothing
-      // if wrong gem display message oops
-      // otherwise make the gem disappear
-      //add it to the game board menu as a recently picked up gem
- 
-      
-    }
-    
-    // ?? - ??????? 
-    //for (int index = 0; index < 10000000; index++) {}
-    
-    repaint();
-  }
+//  public void paintComponent(Graphics g) {
+//    super.paintComponent(g);
+//    
+//    // ??
+//    if (key_down) {  
+//      
+//    }
+//    
+//    // ??
+//    else if (key_up) {  
+//     
+//    }
+//    
+//    else if (key_right) {  
+//
+//    }
+//    
+//    else if (key_left) {  
+//     
+//    }
+//    
+//    else if (key_space) {
+//      //check to see if we collided with a gem
+//      //if yes then pick up the gem
+//      // if no then do nothing
+//      // if wrong gem display message oops
+//      // otherwise make the gem disappear
+//      //add it to the game board menu as a recently picked up gem
+// 
+//      
+//    }
+//    
+//    // ?? - ??????? 
+//    //for (int index = 0; index < 10000000; index++) {}
+//    
+//    repaint();
+//  }
   private class KeyInput implements KeyListener {
     public void keyTyped(KeyEvent e) {}
     
