@@ -1,13 +1,39 @@
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
-import java.lang.Math;
+import javax.swing.event.*;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class TreePanel extends JPanel{
   private static final int WIDTH=36;
   private static final int LEVELDISTANCE=3;
   private int[][] grid;
   RandomTree tree;
+  private JLayeredPane lpane = new JLayeredPane();
+  private JPanel panelStart = new JPanel();
+  private JPanel panelBackground = new JPanel();
   
   public TreePanel(){
+    setBackground(new Color(218,218,218));
+    setLayout(new BorderLayout());
+    lpane.setBounds(0, 0, 600, 400);
+    //panelBackground.setBackground(Color.BLUE);
+    ImageIcon background = new ImageIcon("images/infoBackground.jpg"); 
+    //creates a label and sets the image to it
+    JLabel bthumb = new JLabel();
+    bthumb.setIcon(background);
+    panelBackground.add(bthumb);
+    
+    panelBackground.setBounds(-40, 0, 1345, 1095);
+    
     String[] images={"rupee1.jpg","rupee2.jpg","rupee3.jpg","rupee4.jpg","rupee5.jpg","rupee6.jpg"};
     tree=new RandomTree();
     System.out.println(tree);
@@ -33,6 +59,13 @@ public class TreePanel extends JPanel{
      
       
     }
+
+    //panelStart.setBackground(Color.black);
+    //lpane.setBackground(Color.black);
+    //lpane.add(panelStart, new Integer(3));
+    panelBackground.setOpaque(false);
+    lpane.add(panelBackground, new Integer(1), 0);
+    add(lpane, BorderLayout.CENTER);
   }
   
   public int[][] convertTree(int[] intArray){
