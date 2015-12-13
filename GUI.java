@@ -5,9 +5,11 @@ public class GUI {
   
   public static void displayFrame(){
     JFrame f=new JFrame();
-    f.setSize(new Dimension(700, 600));
+    f.setSize(new Dimension(1356, 1100));
     f.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-    f.getContentPane().add(new TreePanel());
+    TreePanel tree=new TreePanel();
+    tree.setLayout(null);
+    f.getContentPane().add(tree);
     f.setVisible(true);
   }
 

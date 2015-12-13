@@ -1,16 +1,30 @@
-import java.awt.*;
 import javax.swing.*;
 import java.lang.Math;
 
 public class TreePanel extends JPanel{
   private static final int WIDTH=36;
   private static final int LEVELDISTANCE=3;
+  private int[][] grid;
+  RandomTree tree;
   
   public TreePanel(){
-    ImageIcon img =new ImageIcon("grass.jpg");
-    JLabel label=new JLabel();
-    label.setIcon(img);
-    add(label);
+    tree=new RandomTree();
+    System.out.println(tree);
+    convertTree(tree.getTree());
+    for(int y=0;y<WIDTH;y++){
+      for(int x=0;x<WIDTH;x++){
+        if(grid[y][x]==0){
+          JLabel img =new JLabel(new ImageIcon("grass.jpg"));
+          img.setBounds(x*30,(y+10)%WIDTH*30,30,30);
+          add(img);
+        }
+        else if(grid[y][x]==-1){
+          JLabel img2 =new JLabel(new ImageIcon("road.jpg"));
+          img2.setBounds(x*30,(y+10)%WIDTH*30,30,30);
+          add(img2);
+        }
+      }
+    }
   }
   
   public int[][] convertTree(int[] intArray){
@@ -31,36 +45,22 @@ public class TreePanel extends JPanel{
         segment=WIDTH/(power+1);
         distance=segment;       
       }
-      if (intArray[i]!=0){
-        grid[row][distance]=1;
+      if (intArray[i]>-1){
+        grid[row][distance]=intArray[i];
       }
-//      if (WIDTH/(power+1)==0){
-//        segment=1;
-//      }
-//      else if (WIDTH/(power+1)==1){
-//        segment=2;
-//      }
       distance+=segment;
     }
     fillPath(grid);
-    String r="";
-    for (int i=0;i<grid.length;i++){
-      for(int j=0;j<grid[i].length;j++){
-        r+=grid[i][j]+" ";
-      }
-      r+="\n";
-    }
-    System.out.println(r);
     return grid;
   }
   
-  public int[][] fillPath(int[][] grid){
+  public void fillPath(int[][] grid){
     //fills paths with -1
     int pX;
     int pY;
     for(int y=LEVELDISTANCE;y<grid.length;y+=3){
       for(int x=0;x<grid[y].length;x++){
-        if(grid[y][x]==1){
+        if(grid[y][x]>=1){
           pX=findParent(x,y);
           pY=y-LEVELDISTANCE;
           //fills in vertical path
@@ -81,7 +81,7 @@ public class TreePanel extends JPanel{
         }    
       }
     }
-    return grid;
+    this.grid=grid;
   }
   public int findParent(int x,int y){
     //number of nodes in parent level
@@ -98,36 +98,7 @@ public class TreePanel extends JPanel{
     //int test[]={1,1,1,1,1,1,1,0,0,1,1,1,1,0,1,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,0};
     int test[]={1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
     
-    TreePanel t = new TreePanel();
-    t.convertTree(test);
-//    System.out.println("[18]"+t.findParent(24,3));
-//    System.out.println("[12]"+t.findParent(7,6));
-//    System.out.println("[12]"+t.findParent(14,6));
-//    System.out.println("[24]"+t.findParent(21,6));
-//    System.out.println("[24]"+t.findParent(28,6));
-//    System.out.println("[7]"+t.findParent(4,9));
-//    System.out.println("[7]"+t.findParent(8,9));
-//    System.out.println("[14]"+t.findParent(12,9));
-//    System.out.println("[14]"+t.findParent(16,9));
-//    System.out.println("[21]"+t.findParent(20,9));
-//    System.out.println("[21]"+t.findParent(24,9));
-//    System.out.println("[28]"+t.findParent(28,9));
-//    System.out.println("[28]"+t.findParent(32,9));
-//    System.out.println("[4]"+t.findParent(2,12));
-//    System.out.println("[4]"+t.findParent(4,12));
-//    System.out.println("[8]"+t.findParent(6,12));
-//    System.out.println("[8]"+t.findParent(8,12));
-//    System.out.println("[12]"+t.findParent(10,12));
-//    System.out.println("[12]"+t.findParent(12,12));
-//    System.out.println("[16]"+t.findParent(14,12));
-//    System.out.println("[16]"+t.findParent(16,12));
-//    System.out.println("[20]"+t.findParent(18,12));
-//    System.out.println("[20]"+t.findParent(20,12));
-//    System.out.println("[24]"+t.findParent(22,12));
-//    System.out.println("[24]"+t.findParent(24,12));
-//    System.out.println("[28]"+t.findParent(26,12));
-//    System.out.println("[28]"+t.findParent(28,12));
-//    System.out.println("[32]"+t.findParent(30,12));
-//    System.out.println("[32]"+t.findParent(32,12));
+    //TreePanel t = new TreePanel();
+    //t.convertTree(test);
   }
 }

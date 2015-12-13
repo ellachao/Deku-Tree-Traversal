@@ -3,7 +3,7 @@
  * Random Tree Class
  */
 
-import java.util.*;
+
 import javafoundations.LinkedQueue;
 
 public class RandomTree {
@@ -63,7 +63,7 @@ public class RandomTree {
       for (int i = start ; i < end ; i++){
         
         // if this node can't possibly exist (parent doesn't exist), make its children into -1
-        if (tree[1] == -1){
+        if (tree[i] == -1){
           if ( 2*i+2 < capacity) tree[2*i+1] = tree[2*(i+1)] = -1;
         }
         
