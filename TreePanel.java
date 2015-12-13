@@ -167,7 +167,7 @@ public class TreePanel extends JPanel{
   }
   
   public void paintComponent(Graphics g) {
-    super.paintComponent(g);
+    //super.paintComponent(g);
     if (key_down) {  
       moveMakar(0,1);
       
@@ -196,7 +196,7 @@ public class TreePanel extends JPanel{
     removeAll();
     revalidate();
     drawTree();
-    repaint();
+    repaint(0,0,1080,1080);
   }
   private class KeyInput implements KeyListener {
     public void keyTyped(KeyEvent e) {}
