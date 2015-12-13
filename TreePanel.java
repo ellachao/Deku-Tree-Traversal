@@ -8,22 +8,30 @@ public class TreePanel extends JPanel{
   RandomTree tree;
   
   public TreePanel(){
+    String[] images={"rupee1.jpg","rupee2.jpg","rupee3.jpg","rupee4.jpg","rupee5.jpg","rupee6.jpg"};
     tree=new RandomTree();
     System.out.println(tree);
     convertTree(tree.getTree());
     for(int y=0;y<WIDTH;y++){
       for(int x=0;x<WIDTH;x++){
         if(grid[y][x]==0){
-          JLabel img =new JLabel(new ImageIcon("grass.jpg"));
+          JLabel img =new JLabel(new ImageIcon("images/grass.jpg"));
           img.setBounds(x*30,(y+10)%WIDTH*30,30,30);
           add(img);
         }
         else if(grid[y][x]==-1){
-          JLabel img2 =new JLabel(new ImageIcon("road.jpg"));
+          JLabel img2 =new JLabel(new ImageIcon("images/road.jpg"));
           img2.setBounds(x*30,(y+10)%WIDTH*30,30,30);
           add(img2);
         }
+        else{
+          JLabel img3 =new JLabel(new ImageIcon("images/"+images[grid[y][x]%images.length]));
+          img3.setBounds(x*30,(y+10)%WIDTH*30,30,30);
+          add(img3);
+        }
       }
+     
+      
     }
   }
   
