@@ -1,36 +1,34 @@
-/* AboutPanel.java
- CS230 Assignment 5 
- Written by: Mai Li Goodman and Whitney Fahnbulleh
- Modified date: 10/21/2015
- */ 
+/* CS 230 Final Project
+ * Whitney Fahnbulleh, Ella Chao, Sophia Sun
+ * ChoicePanel Class
+ * (primarily written by Whitney)
+ */
+
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.*;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
+
+/**
+ * Creates a ChoicePanel that allows users to pick
+ * which traversal they want to practice.
+ */
 public class ChoicePanel extends JPanel{
-  //private JFrame frame = new JFrame();
   private JLayeredPane lpane = new JLayeredPane();
   private JPanel panelBackground = new JPanel();
   private JPanel panelInorder, panelPost, panelLevel, panelPre, panelSurprise;
-  // private JPanel panelStart = new JPanel();
   private JButton inorderButton, postButton, levelButton, preButton, surpriseButton;
   public ChoicePanel()
   {
     setLayout(new BorderLayout());
     add(lpane, BorderLayout.CENTER);
     lpane.setBounds(0, 0, 600, 400);
-    //panelBackground.setBackground(Color.BLUE);
     ImageIcon background = new ImageIcon("images/choice.jpg"); 
     //creates a label and sets the image to it
     JLabel bthumb = new JLabel();

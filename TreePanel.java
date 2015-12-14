@@ -9,9 +9,18 @@ public class TreePanel extends JPanel{
   private static final int LEVELDISTANCE=3; //distance between each level
   private int[][] grid;
   private JLayeredPane lpane = new JLayeredPane();
+<<<<<<< HEAD
   private JPanel panelLabel1, panelLabel2,panelBackground;
   //private JPanel panelLabel3 = new JPanel();
   //private JPanel panelReplay = new JPanel();
+=======
+  private JPanel panelBackground = new JPanel();
+  private JPanel panelLabel1 = new JPanel();
+  private JPanel panelLabel2 = new JPanel();
+  private JPanel panelLabel3 = new JPanel();
+  private JPanel panelReplay = new JPanel();
+  private JPanel p = new JPanel();
+>>>>>>> origin/master
   private RandomTree tree;
   private JLabel orderLabel,messageLabel, bthumb, replayLabel, rthumb;
   private boolean key_right, key_left, key_down, key_up, key_space; // Input booleans

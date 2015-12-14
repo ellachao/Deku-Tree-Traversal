@@ -1,3 +1,8 @@
+/* CS 230 Final Project
+ * Whitney Fahnbulleh, Ella Chao, Sophia Sun
+ * Makar Class
+ */
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
