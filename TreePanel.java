@@ -2,21 +2,16 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.Graphics;
 import javax.swing.JPanel;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 
 public class TreePanel extends JPanel{
   private static final int WIDTH=36; //width of 2-d array
   private static final int LEVELDISTANCE=3; //distance between each level
   private int[][] grid;
   private JLayeredPane lpane = new JLayeredPane();
-  private JPanel panelStart = new JPanel();
-  private JPanel panelBackground = new JPanel();
-  private JPanel panelLabel1 = new JPanel();
-  private JPanel panelLabel2 = new JPanel();
-  private JPanel panelLabel3 = new JPanel();
-  private JPanel panelReplay = new JPanel();
-  private JPanel p = new JPanel();
+  private JPanel panelLabel1, panelLabel2,panelBackground;
+  //private JPanel panelLabel3 = new JPanel();
+  //private JPanel panelReplay = new JPanel();
   private RandomTree tree;
   private JLabel orderLabel,messageLabel, bthumb, replayLabel, rthumb;
   private boolean key_right, key_left, key_down, key_up, key_space; // Input booleans
@@ -25,16 +20,17 @@ public class TreePanel extends JPanel{
   private int y;
   private int temp; //value of grid[y][x]
   private AnswerQueue ans;
-  private boolean added = false;
-  private JFrame topFrame;
+  private boolean added = false; //to check if panels were added so it doesn't do it more than once
+
   
   public TreePanel(int number){
     setLayout(new BorderLayout());
     this.setFocusable(true);
     addKeyListener(new KeyInput()); 
     tree=new RandomTree();
-    topFrame = (JFrame) SwingUtilities.getRoot(this);
-    
+    panelLabel1 = new JPanel();
+    panelLabel2 = new JPanel();
+    panelBackground = new JPanel();
     convertTree(tree.getTree());
     x=16;
     y=32;
@@ -42,10 +38,26 @@ public class TreePanel extends JPanel{
     grid[y][x]=-2;
     setOpaque(false);
     ans = new AnswerQueue(number, tree);
-    
+    //creates messagelabel that changes
     messageLabel = new JLabel("Good luck!");
-    messageLabel.setFont(new Font("Verdana",1,20));
+    messageLabel.setFont(new Font("Courier New",1,20));
+    panelLabel2.setOpaque(false);
+    panelLabel2.setBounds(955,400,500,500);
     
+    //creates orderlabel
+    orderLabel = new JLabel("<html><p style=\"text-align:center\">Pick up the rupees</p><p style=\"text-align:center\">in <b><i>"+ans.getTraversal() +"</i></b>!</p></html>");
+    orderLabel.setFont(new Font("Courier New",1,20));
+    panelLabel1.setOpaque(false);
+    panelLabel1.setBounds(955,300,500,500);
+    
+    //creates image for the left side of the panel
+    ImageIcon background = new ImageIcon("images/panel.jpg"); 
+    bthumb = new JLabel();
+    bthumb.setIcon(background);
+    panelBackground.setBounds(460, -5, 1345, 1200);
+    panelBackground.setOpaque(false);
+    
+
     drawTree();
     
   }
@@ -87,65 +99,49 @@ public class TreePanel extends JPanel{
           add(img3);
         }
       }
-    ImageIcon background = new ImageIcon("images/panel.jpg"); 
-    bthumb = new JLabel();
-    bthumb.setIcon(background);
-    panelBackground.setBounds(460, -5, 1345, 1200);
-
-    panelBackground.setOpaque(false);
-    
-    orderLabel = new JLabel("<html><p style=\"text-align:center\">Pick up the rupees</p><p style=\"text-align:center\">in <b><i>"+ans.getTraversal() +"</i></b>!</p></html>");
-    orderLabel.setFont(new Font("Courier New",1,20));
-    panelLabel1.setOpaque(false);
-    panelLabel1.setBounds(955,300,500,500);
-    
-
-
-    panelLabel2.setOpaque(false);
-    panelLabel2.setBounds(955,400,500,500);
-    
-        
-    replayLabel = new JLabel("Play Again");
-    replayLabel.setFont(new Font("Courier New",1,20));
-    panelLabel3.setOpaque(false);
-    panelLabel3.setBounds(955,470,500,100);
-    
-    ImageIcon replay = new ImageIcon("images/replay.png"); 
-    //creates a label and sets the image to it
-    rthumb = new JLabel();
-    rthumb.setIcon(replay);
-    panelReplay.setBounds(955, 500, 500, 300);
-    panelReplay.setOpaque(false);
-    
-    if(added==false){
-    panelReplay.addMouseListener(new MouseAdapter() {
-
-                @Override
-                public void mousePressed(MouseEvent e) {
-                  System.out.println("reply button");
-                  GamePanel game = new GamePanel();
-                  String[] cool= {"hello"};
-                  game.main(cool);
-                  //topFrame.dispatchEvent(new WindowEvent(topFrame, WindowEvent.WINDOW_CLOSING));
-                }
-
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                }
-    
-    });
+//The code that has been commited out was our attempt to add a replay button  
+//    replayLabel = new JLabel("Play Again");
+//    replayLabel.setFont(new Font("Courier New",1,20));
+//    panelLabel3.setOpaque(false);
+//    panelLabel3.setBounds(955,470,500,100);
+//    
+//    ImageIcon replay = new ImageIcon("images/replay.png"); 
+//    //creates a label and sets the image to it
+//    rthumb = new JLabel();
+//    rthumb.setIcon(replay);
+//    panelReplay.setBounds(955, 500, 500, 300);
+//    panelReplay.setOpaque(false);
+//    
+    if(added==false){//checks if panels were added
+//    panelReplay.addMouseListener(new MouseAdapter() {
+//
+//                @Override
+//                public void mousePressed(MouseEvent e) {
+//                  System.out.println("reply button");
+//                  GamePanel game = new GamePanel();
+//                  String[] cool= {"hello"};
+//                  game.main(cool);
+//                  //topFrame.dispatchEvent(new WindowEvent(topFrame, WindowEvent.WINDOW_CLOSING));
+//                }
+//
+//                @Override
+//                public void mouseReleased(MouseEvent e) {
+//                }
+//    
+//    });
+    //adds the panels to the gui
     panelBackground.add(bthumb);
     panelLabel1.add(orderLabel);
     panelLabel2.add(messageLabel);
-    panelLabel3.add(replayLabel);
-    panelReplay.add(rthumb);
-    added=true;
+    //panelLabel3.add(replayLabel);
+    //panelReplay.add(rthumb);
+    added=true; //panels have now been added
     }
     lpane.add(panelBackground, new Integer(0), 0);
     lpane.add(panelLabel1, new Integer(1), 1);
     lpane.add(panelLabel2, new Integer(1), 1);
-    lpane.add(panelLabel3, new Integer(1), 1);
-    lpane.add(panelReplay, new Integer(1), 1);
+    //lpane.add(panelLabel3, new Integer(1), 1);
+    //lpane.add(panelReplay, new Integer(1), 1);
     add(lpane, BorderLayout.CENTER);
     setBackground(new Color(218,218,218));
   }
@@ -306,14 +302,18 @@ public class TreePanel extends JPanel{
         //game Won
         if (result == -1) {
           temp=-1;
-          messageLabel.setText("You Won!");
+          messageLabel.setText("<html><p style=\"color:green;  text-align:center\"> <b>You Won!<b></p></html>");
+          messageLabel.setFont(new Font("Courier New",1,30));
         }
+        
         else if (result == 0) {
-          messageLabel.setText("Wrong gem. Please try again!");
+          messageLabel.setText("<html><p style=\"color:red;  text-align:center\" >Failed to pick up rupee.</p> <p style=\"color:red; text-align:center\">Please try again!</p></html>");
+           messageLabel.setFont(new Font("Courier New",1,17));
         }
         else if (result == 1) {
           temp=-1;
-          messageLabel.setText("Correct!");
+          messageLabel.setText("<html><p style=\"color:green;  text-align:center\" >Correct!</p><html>");
+          messageLabel.setFont(new Font("Courier New",1,20));
         }
         
       }
