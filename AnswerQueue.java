@@ -4,13 +4,12 @@
  */
 
 
-import java.util.*;
 import javafoundations.LinkedQueue;
 
 public class AnswerQueue {
   
   private String traversal;
-  private LinkedQueue answer;
+  private LinkedQueue<Integer> answer;
   
   //================================================================
   // constructor: makes answer queue according to input

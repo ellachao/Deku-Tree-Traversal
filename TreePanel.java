@@ -1,16 +1,7 @@
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.*;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -240,12 +231,5 @@ public class TreePanel extends JPanel{
       if (e.getKeyCode() == e.VK_LEFT) key_left = true;
       if (e.getKeyCode() == e.VK_SPACE) key_space = true;
     }
-  }
-  public static void main(String[] args){
-    //int test[]={1,1,1,1,1,1,1,0,0,1,1,1,1,0,1,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,0};
-    int test[]={1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
-    
-    //TreePanel2 t = new TreePanel2();
-    //t.convertTree(test);
   }
 }
