@@ -89,10 +89,7 @@ public class Makar extends JFrame {
             // if wrong gem display message oops
             // otherwise make the gem disappear
             //add it to the game board menu as a recently picked up gem
-              System.out.println(getXCoordinate());
-              System.out.println(getYCoordinate());
-              int x = getXCoordinate()/30;
-              int y = getYCoordinate()/30;
+              
 
             }
 

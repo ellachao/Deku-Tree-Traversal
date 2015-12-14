@@ -1,23 +1,24 @@
-/* AboutPanel.java
- CS230 Assignment 5 
- Written by: Mai Li Goodman and Whitney Fahnbulleh
- Modified date: 10/21/2015
- */ 
+/* CS 230 Final Project
+ * Whitney Fahnbulleh, Ella Chao, Sophia Sun
+ * InfoPanel Class
+ * (primarily written by Whitney)
+ */
+
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.*;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
+
+/**
+ * Creates a panel with instructions on 
+ * how to play the game
+ */
 public class InfoPanel extends JPanel{
   //private JFrame frame = new JFrame();
   private JLayeredPane lpane = new JLayeredPane();

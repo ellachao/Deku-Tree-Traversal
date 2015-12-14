@@ -1,6 +1,6 @@
 /* CS 230 Final Project
  * Whitney Fahnbulleh, Ella Chao, Sophia Sun
- * Answer Queue Class
+ * AnswerQueue Class
  * (primarily written by Sophia)
  */
 
