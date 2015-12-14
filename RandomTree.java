@@ -1,11 +1,17 @@
 /* CS 230 Final Project
  * Whitney Fahnbulleh, Ella Chao, Sophia Sun
  * Random Tree Class
+ * (primarily written by Sophia)
  */
 
 
 import javafoundations.LinkedQueue;
 
+
+/**
+ * Creates a radom tree, with array implementation 
+ * nodes are represent with incrementing integers
+ */
 public class RandomTree {
   
   private final int DEPTH = 4;
@@ -30,8 +36,9 @@ public class RandomTree {
   }
    
   //================================================================
-  // generateRandomTree(): randomly generate a tree with
-  // depth = DEPTH
+  /** generateRandomTree(): randomly generate a tree with
+    * depth = DEPTH
+    */
  //================================================================
   
   public void generateRandomTree()
@@ -100,8 +107,9 @@ public class RandomTree {
   
   //================================================================
   // toString method
-  // Returns the string representation of the binary tree,
-  // one line per level.
+  /*Returns the string representation of the binary tree,
+   * one line per level.
+   */
   //================================================================
   public String toString()
   {
