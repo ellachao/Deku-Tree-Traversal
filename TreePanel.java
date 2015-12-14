@@ -1,3 +1,9 @@
+/* CS 230 Final Project
+ * Whitney Fahnbulleh, Ella Chao, Sophia Sun
+ * TreePanel Class
+ * (primarily written by Ella Chao some assistance from Whitney Fahnbulleh and Sophia Sun)
+ */
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.Graphics;
@@ -9,18 +15,10 @@ public class TreePanel extends JPanel{
   private static final int LEVELDISTANCE=3; //distance between each level
   private int[][] grid;
   private JLayeredPane lpane = new JLayeredPane();
-<<<<<<< HEAD
   private JPanel panelLabel1, panelLabel2,panelBackground;
   //private JPanel panelLabel3 = new JPanel();
   //private JPanel panelReplay = new JPanel();
-=======
-  private JPanel panelBackground = new JPanel();
-  private JPanel panelLabel1 = new JPanel();
-  private JPanel panelLabel2 = new JPanel();
-  private JPanel panelLabel3 = new JPanel();
-  private JPanel panelReplay = new JPanel();
-  private JPanel p = new JPanel();
->>>>>>> origin/master
+
   private RandomTree tree;
   private JLabel orderLabel,messageLabel, bthumb, replayLabel, rthumb;
   private boolean key_right, key_left, key_down, key_up, key_space; // Input booleans
@@ -314,11 +312,13 @@ public class TreePanel extends JPanel{
           messageLabel.setText("<html><p style=\"color:green;  text-align:center\"> <b>You Won!<b></p></html>");
           messageLabel.setFont(new Font("Courier New",1,30));
         }
-        
+        //failed to pick up
         else if (result == 0) {
           messageLabel.setText("<html><p style=\"color:red;  text-align:center\" >Failed to pick up rupee.</p> <p style=\"color:red; text-align:center\">Please try again!</p></html>");
            messageLabel.setFont(new Font("Courier New",1,17));
         }
+        
+        //correct
         else if (result == 1) {
           temp=-1;
           messageLabel.setText("<html><p style=\"color:green;  text-align:center\" >Correct!</p><html>");
