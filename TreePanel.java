@@ -10,6 +10,12 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 import java.awt.event.*;
 
+/**
+ * Paints makar abdthe randomly generated tree on 
+ * the panel; updates makar's location based on 
+ * key inputs
+ */
+
 public class TreePanel extends JPanel{
   private static final int WIDTH=36; //width of 2-d array
   private static final int LEVELDISTANCE=3; //distance between each level
@@ -18,7 +24,7 @@ public class TreePanel extends JPanel{
   private JPanel panelLabel1, panelLabel2,panelBackground;
   //private JPanel panelLabel3 = new JPanel();
   //private JPanel panelReplay = new JPanel();
-
+  
   private RandomTree tree;
   private JLabel orderLabel,messageLabel, bthumb, replayLabel, rthumb;
   private boolean key_right, key_left, key_down, key_up, key_space; // Input booleans
@@ -28,7 +34,7 @@ public class TreePanel extends JPanel{
   private int temp; //value of grid[y][x]
   private AnswerQueue ans;
   private boolean added = false; //to check if panels were added so it doesn't do it more than once
-
+  
   
   public TreePanel(int number){
     setLayout(new BorderLayout());
@@ -39,6 +45,7 @@ public class TreePanel extends JPanel{
     panelLabel2 = new JPanel();
     panelBackground = new JPanel();
     convertTree(tree.getTree());
+    //initial location of makar
     x=16;
     y=32;
     temp=grid[y][x];
@@ -64,7 +71,6 @@ public class TreePanel extends JPanel{
     panelBackground.setBounds(460, -5, 1345, 1200);
     panelBackground.setOpaque(false);
     
-
     drawTree();
     
   }
@@ -73,6 +79,7 @@ public class TreePanel extends JPanel{
     return tree;
   }
   
+  //paints tree on the panel
   private void drawTree(){
     //list of rupee images
     String[] images={"rupee1.jpg","rupee2.jpg","rupee3.jpg","rupee4.jpg","rupee5.jpg","rupee6.jpg"};
@@ -119,7 +126,7 @@ public class TreePanel extends JPanel{
 //    panelReplay.setBounds(955, 500, 500, 300);
 //    panelReplay.setOpaque(false);
 //    
-    if(added==false){//checks if panels were added
+      if(added==false){//checks if panels were added
 //    panelReplay.addMouseListener(new MouseAdapter() {
 //
 //                @Override
@@ -136,24 +143,23 @@ public class TreePanel extends JPanel{
 //                }
 //    
 //    });
-    //adds the panels to the gui
-    panelBackground.add(bthumb);
-    panelLabel1.add(orderLabel);
-    panelLabel2.add(messageLabel);
-    //panelLabel3.add(replayLabel);
-    //panelReplay.add(rthumb);
-    added=true; //panels have now been added
+        //adds the panels to the gui
+        panelBackground.add(bthumb);
+        panelLabel1.add(orderLabel);
+        panelLabel2.add(messageLabel);
+        //panelLabel3.add(replayLabel);
+        //panelReplay.add(rthumb);
+        added=true; //panels have now been added
+      }
+      lpane.add(panelBackground, new Integer(0), 0);
+      lpane.add(panelLabel1, new Integer(1), 1);
+      lpane.add(panelLabel2, new Integer(1), 1);
+      //lpane.add(panelLabel3, new Integer(1), 1);
+      //lpane.add(panelReplay, new Integer(1), 1);
+      add(lpane, BorderLayout.CENTER);
+      setBackground(new Color(218,218,218));
     }
-    lpane.add(panelBackground, new Integer(0), 0);
-    lpane.add(panelLabel1, new Integer(1), 1);
-    lpane.add(panelLabel2, new Integer(1), 1);
-    //lpane.add(panelLabel3, new Integer(1), 1);
-    //lpane.add(panelReplay, new Integer(1), 1);
-    add(lpane, BorderLayout.CENTER);
-    setBackground(new Color(218,218,218));
   }
-  }
-  
   
   
   //converts list of nodes to a 2-d array 
@@ -246,8 +252,8 @@ public class TreePanel extends JPanel{
     y=newY;
   }
   
+  //updates makar's location
   public void paintComponent(Graphics g) {
-    //super.paintComponent(g);
     //check which keys is pressed
     //call moveMakar accordingly
     if (key_down) {  
@@ -273,15 +279,13 @@ public class TreePanel extends JPanel{
       // otherwise make the gem disappear
       //add it to the game board menu as a recently picked up gem
       
- 
-      
     }
     removeAll();
     revalidate();
     drawTree();
     repaint();
   }
-
+  
   private class KeyInput implements KeyListener {
     public void keyTyped(KeyEvent e) {} //abstract method that has to be implemented
     public void keyReleased(KeyEvent e) {
@@ -300,11 +304,7 @@ public class TreePanel extends JPanel{
       if (e.getKeyCode() == e.VK_LEFT) key_left = true;
       if (e.getKeyCode() == e.VK_SPACE) {
         
-        System.out.println("space!");
-        
         int result = ans.checkAnswer(temp);
-        System.out.println(ans);
-        System.out.println(temp+ " and result:  "+ result);
         
         //game Won
         if (result == -1) {
@@ -315,7 +315,7 @@ public class TreePanel extends JPanel{
         //failed to pick up
         else if (result == 0) {
           messageLabel.setText("<html><p style=\"color:red;  text-align:center\" >Failed to pick up rupee.</p> <p style=\"color:red; text-align:center\">Please try again!</p></html>");
-           messageLabel.setFont(new Font("Courier New",1,17));
+          messageLabel.setFont(new Font("Courier New",1,17));
         }
         
         //correct
@@ -328,5 +328,5 @@ public class TreePanel extends JPanel{
       }
     }
   }
-
+  
 }
