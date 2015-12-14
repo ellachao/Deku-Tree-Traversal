@@ -20,7 +20,9 @@ public class GamePanel extends JPanel{
 
     JFrame frame = new JFrame("Deku Tree Traversal");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//closed when you click close
-    frame.setPreferredSize(new Dimension(1356, 1100)); //wxh
+    frame.setPreferredSize(new Dimension(1356, 1100));
+    frame.setBackground(new Color(218,218,218));
+//wxh
     //JTabbedPane tp = new JTabbedPane();//creating a tabbed Pane
     //tp.setBackground(Color.decode("#ffffff"));//sets the background of the tabbed pane to white
     //creates the tabs for the respective panels

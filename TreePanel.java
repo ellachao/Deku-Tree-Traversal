@@ -23,60 +23,31 @@ public class TreePanel extends JPanel{
   private JPanel panelBackground = new JPanel();
   private JPanel panelLabel1 = new JPanel();
   private JPanel panelLabel2 = new JPanel();
+  private JPanel p = new JPanel();
   private RandomTree tree;
+  private JLabel orderLabel,messageLabel, bthumb;
   private boolean key_right, key_left, key_down, key_up, key_space; // Input booleans
   private int x;
   private int y;
   private int temp;
   private AnswerQueue ans;
+  private boolean added = false;
   
   public TreePanel(int number){
+    setLayout(new BorderLayout());
     this.setFocusable(true);
     addKeyListener(new KeyInput()); 
     tree=new RandomTree();
+    
     convertTree(tree.getTree());
     x=16;
     y=32;
     temp=grid[y][x];
     grid[y][x]=-2;
-    drawTree();
-    setBackground(new Color(218,218,218));
-    setLayout(new BorderLayout());
-    lpane.setBounds(0, 0, 600, 400);
-    //panelBackground.setBackground(Color.BLUE);
-    ImageIcon background = new ImageIcon("images/infoBackground.jpg"); 
-    //creates a label and sets the image to it
-    JLabel bthumb = new JLabel();
-    bthumb.setIcon(background);
-    panelBackground.add(bthumb);
-    
-    panelBackground.setBounds(-40, 0, 1345, 1095);
-    
-    //panelStart.setBackground(Color.black);
-    //lpane.setBackground(Color.black);
-    //lpane.add(panelStart, new Integer(3));
-    panelBackground.setOpaque(false);
-    
+    setOpaque(false);
     ans = new AnswerQueue(number, tree);
+    drawTree();
     
-   
-    
-    JLabel orderLabel = new JLabel("<html><p>Pick up the rupees in</p> <p style=\"text-align:center\">" + ans.getTraversal() +"!</p></html>");
-    orderLabel.setFont(new Font("Verdana",1,20));
-    panelLabel1.setOpaque(false);
-    panelLabel1.add(orderLabel);
-    panelLabel1.setBounds(955,300,500,500);
-    
-    JLabel messageLabel = new JLabel("Good luck!");
-    messageLabel.setFont(new Font("Verdana",1,20));
-    panelLabel2.setOpaque(false);
-    panelLabel2.add(messageLabel);
-    panelLabel2.setBounds(955,400,500,500);
-    
-    lpane.add(panelBackground, new Integer(1), 0);
-    lpane.add(panelLabel1, new Integer(2), 0);
-    lpane.add(panelLabel2, new Integer(2), 0);
-    add(lpane, BorderLayout.CENTER);
   }
   
   public RandomTree getTree(){
@@ -107,7 +78,38 @@ public class TreePanel extends JPanel{
           add(img3);
         }
       }
+    //lpane.setBounds(0, 0, 600, 400);
+    //panelBackground.setBackground(Color.BLUE);
+    ImageIcon background = new ImageIcon("images/panel.jpg"); 
+    //creates a label and sets the image to it
+    bthumb = new JLabel();
+    bthumb.setIcon(background);
+    panelBackground.setBounds(460, -5, 1345, 1200);
+
+    panelBackground.setOpaque(false);
+    
+    orderLabel = new JLabel("<html><p style=\"text-align:center\">Pick up the rupees in</p><p style=\"text-align:center\">"+ans.getTraversal() +"!</p></html>");
+    orderLabel.setFont(new Font("Verdana",1,20));
+    panelLabel1.setOpaque(false);
+    panelLabel1.setBounds(955,300,500,500);
+    
+    messageLabel = new JLabel("Good luck!");
+    messageLabel.setFont(new Font("Verdana",1,20));
+    panelLabel2.setOpaque(false);
+    panelLabel2.setBounds(955,400,500,500);
+
     }
+    if(added==false){
+    panelBackground.add(bthumb);
+    panelLabel1.add(orderLabel);
+    panelLabel2.add(messageLabel);
+    added=true;
+    }
+    lpane.add(panelBackground, new Integer(0), 0);
+    lpane.add(panelLabel1, new Integer(1), 1);
+    lpane.add(panelLabel2, new Integer(1), 1);
+    add(lpane, BorderLayout.CENTER);
+    setBackground(new Color(218,218,218));
   }
   
   public int[][] convertTree(int[] intArray){
@@ -189,7 +191,7 @@ public class TreePanel extends JPanel{
   }
   
   public void paintComponent(Graphics g) {
-    super.paintComponent(g);
+    //super.paintComponent(g);
     if (key_down) {  
       moveMakar(0,1);
       
@@ -218,49 +220,7 @@ public class TreePanel extends JPanel{
     removeAll();
     revalidate();
     drawTree();
-    repaint();
-  }
-
-  public void paintComponent(Graphics g) {
-    super.paintComponent(g);
-    
-    // ??
-    if (key_down) {  
-      
-    }
-    
-    // ??
-    else if (key_up) {  
-     
-    }
-    
-    else if (key_right) {  
-
-    }
-    
-    else if (key_left) {  
-     
-    }
-    
-    else if (key_space) {
-      //check to see if we collided with a gem
-      //if yes then pick up the gem
-      // if no then do nothing
-      // if wrong gem display message oops
-      // otherwise make the gem disappear
-      //add it to the game board menu as a recently picked up gem
-      int result = ans.checkAnswer(grid[x][y]);
-      //if (result == -1) gameWon();
-      //if (result == 0) tryAgain();
-      //if (result == 1) pickGem();
-      
-      
-    }
-     
-    // ?? - ??????? 
-    //for (int index = 0; index < 10000000; index++) {}
-    
-    repaint();
+    repaint(0,0,1080,1080);
   }
 
   private class KeyInput implements KeyListener {
@@ -285,7 +245,7 @@ public class TreePanel extends JPanel{
     //int test[]={1,1,1,1,1,1,1,0,0,1,1,1,1,0,1,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,0};
     int test[]={1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
     
-    //TreePanel t = new TreePanel();
+    //TreePanel2 t = new TreePanel2();
     //t.convertTree(test);
   }
 }
