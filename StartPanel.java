@@ -21,36 +21,40 @@ import javax.swing.JPanel;
 public class StartPanel extends JPanel{
   //private JFrame frame = new JFrame();
   private JLayeredPane lpane = new JLayeredPane();
-  private JPanel panelBackground = new JPanel();
-  private JPanel panelInfo = new JPanel();
-  private JPanel panelStart = new JPanel();
+  private JPanel panelStart,panelInfo,panelBackground;
   private JButton infoButton, startButton;
+  
   public StartPanel()
   {
     setLayout(new BorderLayout());
     add(lpane, BorderLayout.CENTER);
     lpane.setBounds(0, 0, 600, 400);
-    //panelBackground.setBackground(Color.BLUE);
-    ImageIcon background = new ImageIcon("images/start.jpg"); 
+    panelBackground = new JPanel();
+    panelInfo = new JPanel();
+    panelStart = new JPanel();
     //creates a label and sets the image to it
+    ImageIcon background = new ImageIcon("images/start.jpg"); 
     JLabel bthumb = new JLabel();
     bthumb.setIcon(background);
-    
     panelBackground.add(bthumb);
-    
     panelBackground.setBounds(0, 0, 1345, 1095);
     panelBackground.setOpaque(true);
-    panelInfo.setBackground(new Color(0,0,0,0));
-    panelInfo.setBounds(210, 614, 200, 300);
-    panelInfo.setOpaque(false);
+
+    
     BufferedImage infoButtonIcon=null;
     BufferedImage startButtonIcon=null;
+   //trys to set image 
     try{
       infoButtonIcon = ImageIO.read(new File("images/info.png"));
       startButtonIcon = ImageIO.read(new File("images/startGame.png"));
     }catch(IOException e){
-      System.out.println("yolo");
+      System.out.println("Image not found");
     }
+    
+    //creates infobutton and adds it to its panel
+    panelInfo.setBackground(new Color(0,0,0,0));
+    panelInfo.setBounds(210, 614, 200, 300);
+    panelInfo.setOpaque(false);
     infoButton = new JButton(new ImageIcon(infoButtonIcon));
     infoButton.setBorder(BorderFactory.createEmptyBorder());
     infoButton.setContentAreaFilled(false);
@@ -60,6 +64,7 @@ public class StartPanel extends JPanel{
     infoButton.addActionListener(new ButtonListener());
     panelInfo.add(infoButton);
     
+    //creates startbutton and adds it to its panel
     panelStart.setBackground(new Color(0,0,0,0));
     panelStart.setBounds(630, 590, 350, 325);
     panelStart.setOpaque(false);
@@ -73,7 +78,7 @@ public class StartPanel extends JPanel{
     panelStart.add(startButton);
     
     
-    
+    //adds background infor and start panels
     lpane.add(panelBackground, new Integer(0), 0);
     lpane.add(panelInfo, new Integer(1), 0);
     lpane.add(panelStart, new Integer(1), 0);
@@ -81,6 +86,7 @@ public class StartPanel extends JPanel{
   private class ButtonListener implements ActionListener{
     
     public void actionPerformed(ActionEvent event){
+      //creates infoPanel instance when infobutton is pressed
       if (event.getSource() == infoButton) {
         System.out.println("info button press"); 
         InfoPanel infoPanel = new InfoPanel();
@@ -90,6 +96,7 @@ public class StartPanel extends JPanel{
         remove(lpane);
       }
       if (event.getSource() == startButton)  {
+        //creates the choicePanel instance when startgame is pressed
         ChoicePanel choicePanel = new ChoicePanel();
         add(choicePanel);
         validate();
