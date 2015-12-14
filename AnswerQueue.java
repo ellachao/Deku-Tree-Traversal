@@ -1,11 +1,16 @@
 /* CS 230 Final Project
  * Whitney Fahnbulleh, Ella Chao, Sophia Sun
  * Answer Queue Class
+ * (primarily written by Sophia)
  */
 
 
 import javafoundations.LinkedQueue;
 
+/**
+ * Creates a linked Queue for the given traversal,  
+ * corresponds with TreePanel class to check answers
+ */
 public class AnswerQueue {
   
   private String traversal;
@@ -20,7 +25,6 @@ public class AnswerQueue {
   // 3: level order
   // 4: random
   //================================================================
-
 
   public AnswerQueue(int i, RandomTree t){
 
@@ -59,10 +63,6 @@ public class AnswerQueue {
     return traversal;
   }
     
-    public boolean isEmpty() {
-      return (answer.isEmpty());
-    }
-    
     public String toString() {
       return (answer.toString());
     }
@@ -71,6 +71,14 @@ public class AnswerQueue {
       return (answer.first());
     }
     
+    //----------------------------------------------------
+   /**
+    * check answer here, returns an int as result
+    * -1: game won
+    * 0: wrong pick
+    * 1: right pick
+    */
+   //----------------------------------------------------
     public int checkAnswer(int i) {
       Integer input = new Integer(i);
       
@@ -78,7 +86,7 @@ public class AnswerQueue {
         answer.dequeue();
         
         //GAME WON!!!
-        if (isEmpty()) return -1;
+        if (answer.isEmpty()) return -1;
         
         //picks up the right gem
         else return 1;
