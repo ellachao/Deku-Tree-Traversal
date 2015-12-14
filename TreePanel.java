@@ -46,6 +46,10 @@ public class TreePanel extends JPanel{
     grid[y][x]=-2;
     setOpaque(false);
     ans = new AnswerQueue(number, tree);
+    
+    messageLabel = new JLabel("Good luck!");
+    messageLabel.setFont(new Font("Verdana",1,20));
+    
     drawTree();
     
   }
@@ -93,8 +97,6 @@ public class TreePanel extends JPanel{
     panelLabel1.setOpaque(false);
     panelLabel1.setBounds(955,300,500,500);
     
-    messageLabel = new JLabel("Good luck!");
-    messageLabel.setFont(new Font("Verdana",1,20));
     panelLabel2.setOpaque(false);
     panelLabel2.setBounds(955,400,500,500);
 
@@ -187,7 +189,7 @@ public class TreePanel extends JPanel{
     
     x=newX;
     y=newY;
-    System.out.println(1);
+    //System.out.println(1);
   }
   
   public void paintComponent(Graphics g) {
@@ -214,13 +216,15 @@ public class TreePanel extends JPanel{
       // if wrong gem display message oops
       // otherwise make the gem disappear
       //add it to the game board menu as a recently picked up gem
+      
  
       
     }
     removeAll();
     revalidate();
     drawTree();
-    repaint(0,0,1080,1080);
+    //repaint(0,0,1080,1080);
+    repaint();
   }
 
   private class KeyInput implements KeyListener {
@@ -238,7 +242,28 @@ public class TreePanel extends JPanel{
       if (e.getKeyCode() == e.VK_UP) key_up = true;
       if (e.getKeyCode() == e.VK_RIGHT) key_right = true;
       if (e.getKeyCode() == e.VK_LEFT) key_left = true;
-      if (e.getKeyCode() == e.VK_SPACE) key_space = true;
+      if (e.getKeyCode() == e.VK_SPACE) {
+        
+        System.out.println("space!");
+        
+        int result = ans.checkAnswer(temp);
+        System.out.println(ans);
+        System.out.println(temp+ " and result:  "+ result);
+        
+        //game Won
+        if (result == -1) {
+          temp=-1;
+          messageLabel.setText("You Won!");
+        }
+        else if (result == 0) {
+          messageLabel.setText("Wrong gem. Please try again!");
+        }
+        else if (result == 1) {
+          temp=-1;
+          messageLabel.setText("Correct!");
+        }
+        
+      }
     }
   }
   public static void main(String[] args){
