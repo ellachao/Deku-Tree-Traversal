@@ -23,21 +23,25 @@ public class TreePanel extends JPanel{
   private JPanel panelBackground = new JPanel();
   private JPanel panelLabel1 = new JPanel();
   private JPanel panelLabel2 = new JPanel();
+  private JPanel panelLabel3 = new JPanel();
+  private JPanel panelReplay = new JPanel();
   private JPanel p = new JPanel();
   private RandomTree tree;
-  private JLabel orderLabel,messageLabel, bthumb;
+  private JLabel orderLabel,messageLabel, bthumb, replayLabel, rthumb;
   private boolean key_right, key_left, key_down, key_up, key_space; // Input booleans
   private int x;
   private int y;
   private int temp;
   private AnswerQueue ans;
   private boolean added = false;
+  private JFrame topFrame;
   
   public TreePanel(int number){
     setLayout(new BorderLayout());
     this.setFocusable(true);
     addKeyListener(new KeyInput()); 
     tree=new RandomTree();
+    topFrame = (JFrame) SwingUtilities.getRoot(this);
     
     convertTree(tree.getTree());
     x=16;
@@ -53,6 +57,7 @@ public class TreePanel extends JPanel{
   public RandomTree getTree(){
     return tree;
   }
+  
   private void drawTree(){
     String[] images={"rupee1.jpg","rupee2.jpg","rupee3.jpg","rupee4.jpg","rupee5.jpg","rupee6.jpg"};
     for(int y=0;y<WIDTH;y++){
@@ -68,7 +73,7 @@ public class TreePanel extends JPanel{
           add(img2);
         }
         else if(grid[y][x]==-2){
-          JLabel makar =new JLabel(new ImageIcon("images/makar.png"));
+          JLabel makar =new JLabel(new ImageIcon("images/newmakar.png"));
           makar.setBounds(x*30,(y+10)%WIDTH*30,30,30);
           add(makar);
         }
@@ -88,29 +93,64 @@ public class TreePanel extends JPanel{
 
     panelBackground.setOpaque(false);
     
-    orderLabel = new JLabel("<html><p style=\"text-align:center\">Pick up the rupees in</p><p style=\"text-align:center\">"+ans.getTraversal() +"!</p></html>");
-    orderLabel.setFont(new Font("Verdana",1,20));
+    orderLabel = new JLabel("<html><p style=\"text-align:center\">Pick up the rupees</p><p style=\"text-align:center\">in <b><i>"+ans.getTraversal() +"</i></b>!</p></html>");
+    orderLabel.setFont(new Font("Courier New",1,20));
     panelLabel1.setOpaque(false);
     panelLabel1.setBounds(955,300,500,500);
     
     messageLabel = new JLabel("Good luck!");
-    messageLabel.setFont(new Font("Verdana",1,20));
+    messageLabel.setFont(new Font("Courier New",1,20));
     panelLabel2.setOpaque(false);
     panelLabel2.setBounds(955,400,500,500);
-
-    }
+    
+        
+    replayLabel = new JLabel("Play Again");
+    replayLabel.setFont(new Font("Courier New",1,20));
+    panelLabel3.setOpaque(false);
+    panelLabel3.setBounds(955,470,500,100);
+    
+    ImageIcon replay = new ImageIcon("images/replay.png"); 
+    //creates a label and sets the image to it
+    rthumb = new JLabel();
+    rthumb.setIcon(replay);
+    panelReplay.setBounds(955, 500, 500, 300);
+    panelReplay.setOpaque(false);
+    
     if(added==false){
+    panelReplay.addMouseListener(new MouseAdapter() {
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                  System.out.println("reply button");
+                  GamePanel game = new GamePanel();
+                  String[] cool= {"hello"};
+                  game.main(cool);
+                  //topFrame.dispatchEvent(new WindowEvent(topFrame, WindowEvent.WINDOW_CLOSING));
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                }
+    
+    });
     panelBackground.add(bthumb);
     panelLabel1.add(orderLabel);
     panelLabel2.add(messageLabel);
+    panelLabel3.add(replayLabel);
+    panelReplay.add(rthumb);
     added=true;
     }
     lpane.add(panelBackground, new Integer(0), 0);
     lpane.add(panelLabel1, new Integer(1), 1);
     lpane.add(panelLabel2, new Integer(1), 1);
+    lpane.add(panelLabel3, new Integer(1), 1);
+    lpane.add(panelReplay, new Integer(1), 1);
     add(lpane, BorderLayout.CENTER);
     setBackground(new Color(218,218,218));
   }
+  }
+  
+  
   
   public int[][] convertTree(int[] intArray){
     //0 for grass; 1 for nodes
@@ -168,6 +208,7 @@ public class TreePanel extends JPanel{
     }
     this.grid=grid;
   }
+  
   public int findParent(int x,int y){
     //number of nodes in parent level
     int numPNodes=(int)Math.pow(2,(y-LEVELDISTANCE)/LEVELDISTANCE);
@@ -248,4 +289,19 @@ public class TreePanel extends JPanel{
     //TreePanel2 t = new TreePanel2();
     //t.convertTree(test);
   }
+//  
+//private class ButtonListener implements ActionListener{
+//    
+//    public void actionPerformed(ActionEvent event){
+//      if (event.getSource() == replayButton) {
+//        System.out.println("reply button");
+//        ChoicePanel choicePanel = new ChoicePanel();
+//        add(choicePanel);
+//        validate();
+//        repaint();
+//        remove(lpane);
+//        
+//      }
+//}
+//}
 }
